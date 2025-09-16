@@ -1,0 +1,12 @@
+{
+  "name": "l3isd-demo-1",
+  "location": "uksouth",
+  "properties": {
+    "networkFabricId": "/subscriptions/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX/resourcegroups/resourceGroupName/providers/microsoft.managednetworkfabric/networkfabrics/fabricName",
+    "connectedSubnetRoutePolicy": {
+        "exportRoutePolicyId": "/subscriptions/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX/resourceGroups/resourceGroupName/providers/Microsoft.ManagedNetworkFabric/routePolicies/routePolicyName"
+    }
+  },
+  "resourceGroupName": "resourceGroupName",
+  "subscriptionId": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+}

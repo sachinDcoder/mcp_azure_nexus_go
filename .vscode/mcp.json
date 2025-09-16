@@ -1,0 +1,8 @@
+{
+  "servers": {
+    "Azure Nexus MCP (Golang)": {
+      "type": "stdio",
+      "command": "/home/rajasachin/hackathon/azure-nexus-mcp-server/azure-nexus-mcp-server",
+    }
+  }
+}

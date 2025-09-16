@@ -1,0 +1,7 @@
+{
+"name": "ipcommunity-2601-exp-1",
+"location": "uksouth",
+"properties": "{\n "ipCommunityRules": [\n {\n "action": "Permit",\n "sequenceNumber": 123,\n "wellKnownCommunities": [\n "Internet",\n "LocalAS"\n ],\n "communityMembers": ["12076:5020"]\n }\n ]\n }",
+"resourceGroupName": "sachin-test-trustedip1",
+"subscriptionId": "XXXXXXXXX"
+}

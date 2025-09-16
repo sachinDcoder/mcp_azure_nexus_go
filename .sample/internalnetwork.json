@@ -1,0 +1,15 @@
+{
+  "l3IsolationDomainName": "l3isd-demo-1",
+  "internalNetworkName": "internalnetwork-demo-1",
+  "properties": {
+    "vlanId": 1001,
+    "mtu": 1500,
+    "connectedIPv4Subnets": [
+        {
+            "prefix": "10.0.0.0/24"
+        }
+    ]
+  },
+  "resourceGroupName": "resourceGroupName",
+  "subscriptionId": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+}

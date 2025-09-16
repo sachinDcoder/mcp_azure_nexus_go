@@ -1,0 +1,7 @@
+{
+  "name": "demo-1",
+  "location": "uksouth",
+  "properties": "{\n        \"ipPrefixRules\": [\n            {\n                \"action\": \"Deny\",\n                \"sequenceNumber\": 3622,\n                \"networkPrefix\": \"10.2.32.0/26\",\n                \"condition\": \"LesserThanOrEqualTo\",\n                \"subnetMaskLength\": \"26\"\n            }\n        ]\n    }",
+  "resourceGroupName": "sachin-test-trustedip1",
+  "subscriptionId": "XXXXXXXXXXXXX"
+}
