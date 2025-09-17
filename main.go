@@ -30,6 +30,7 @@ func main() {
 	s.AddTool(tools.CreateL2IsolationDomain(tools.ServiceClientRetriever{}))
 	s.AddTool(tools.EnableL2IsolationDomain(tools.ServiceClientRetriever{}))
 	s.AddTool(tools.DisableL2IsolationDomain(tools.ServiceClientRetriever{}))
+	s.AddTool(tools.CreateExternalNetwork(tools.ServiceClientRetriever{}))
 
 	// Start the stdio server
 	if err := server.ServeStdio(s); err != nil {

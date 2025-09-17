@@ -55,4 +55,10 @@ const (
 	L2_ISOLATION_DOMAIN_SUBSCRIPTION_ID_DESCRIPTION = "The subscription ID for the Azure account."
 	ENABLE_L2_ISOLATION_DOMAIN_TOOL_NAME            = "enable_l2isolationdomain"
 	DISABLE_L2_ISOLATION_DOMAIN_TOOL_NAME           = "disable_l2isolationdomain"
+
+	CREATE_EXTERNAL_NETWORK_TOOL_NAME            = "create_externalnetwork"
+	EXTERNAL_NETWORK_PARAMETER_DESCRIPTION       = "The name of the External Network to be created."
+	EXTERNAL_NETWORK_PROPERTIES_DESCRIPTION      = "The properties of the External Network. This should be a JSON string."
+	EXTERNAL_NETWORK_RESOURCE_GROUP_DESCRIPTION  = "The name of the resource group."
+	EXTERNAL_NETWORK_SUBSCRIPTION_ID_DESCRIPTION = "The subscription ID for the Azure account."
 )

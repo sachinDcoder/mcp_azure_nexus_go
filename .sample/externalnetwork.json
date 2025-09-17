@@ -1,0 +1,16 @@
+{
+  "l3IsolationDomainName": "l3isd-demo-1",
+  "externalNetworkName": "externalnetwork-demo-1",
+  "properties": {
+    "peeringOption": "OptionA",
+    "optionAProperties": {
+      "primaryIpv4Prefix": "10.1.1.0/30",
+      "secondaryIpv4Prefix": "10.1.1.4/30",
+      "mtu": 1500,
+      "vlanId": 1002,
+      "peerASN": 65001
+    }
+  },
+  "resourceGroupName": "sachin-test-trustedip1",
+  "subscriptionId": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+}
