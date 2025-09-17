@@ -1,0 +1,15 @@
+{
+  "l3IsolationDomainName": "l3isd-demo-1",
+  "externalNetworkName": "externalnetwork-demo-2",
+  "properties": {
+    "peeringOption": "OptionB",
+    "optionBProperties": {
+      "importRoutePolicyId": "/subscriptions/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX/resourceGroups/sachin-test-trustedip1/providers/Microsoft.ManagedNetworkFabric/routePolicies/rcf-rajasachin1-nf-l3domain-routepolicy-2622",
+      "exportRoutePolicyId": "/subscriptions/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX/resourceGroups/sachin-test-trustedip1/providers/Microsoft.ManagedNetworkFabric/routePolicies/rcf-rajasachin1-nf-l3domain-routepolicy-2622",
+      "importRouteTargets": ["65001:1001"],
+      "exportRouteTargets": ["65001:1001"]
+    }
+  },
+  "resourceGroupName": "sachin-test-trustedip1",
+  "subscriptionId": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+}

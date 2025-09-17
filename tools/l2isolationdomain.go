@@ -240,3 +240,261 @@ func disableL2IsolationDomain() mcp.Tool {
 		mcp.WithDescription("Disable an L2 Isolation Domain"),
 	)
 }
+
+func GetL2IsolationDomain(clientRetriever ServiceClientRetriever) (mcp.Tool, server.ToolHandlerFunc) {
+	return getL2IsolationDomain(), func(ctx context.Context, request mcp.CallToolRequest) (*mcp.CallToolResult, error) {
+		args, ok := request.Params.Arguments.(map[string]any)
+		if !ok {
+			return nil, errors.New("invalid arguments format")
+		}
+
+		name, ok := args["name"].(string)
+		if !ok || name == "" {
+			return nil, errors.New("L2 isolation domain name missing")
+		}
+
+		resourceGroupName, ok := args["resourceGroupName"].(string)
+		if !ok || resourceGroupName == "" {
+			return nil, errors.New("resource group name missing")
+		}
+
+		subscriptionId, ok := args["subscriptionId"].(string)
+		if !ok || subscriptionId == "" {
+			return nil, errors.New("subscription id missing")
+		}
+
+		cred, err := clientRetriever.Get()
+		if err != nil {
+			return nil, fmt.Errorf("error getting credentials: %v", err)
+		}
+
+		client, err := armmanagednetworkfabric.NewL2IsolationDomainsClient(subscriptionId, cred, nil)
+		if err != nil {
+			return nil, fmt.Errorf("failed to create L2 isolation domains client: %v", err)
+		}
+
+		res, err := client.Get(ctx, resourceGroupName, name, nil)
+		if err != nil {
+			return nil, fmt.Errorf("failed to get L2 isolation domain: %v", err)
+		}
+
+		resJson, err := json.Marshal(res)
+		if err != nil {
+			return nil, fmt.Errorf("failed to marshal response: %v", err)
+		}
+
+		return mcp.NewToolResultText(string(resJson)), nil
+	}
+}
+
+func getL2IsolationDomain() mcp.Tool {
+	return mcp.NewTool(
+		GET_L2_ISOLATION_DOMAIN_TOOL_NAME,
+		mcp.WithString("name",
+			mcp.Required(),
+			mcp.Description(L2_ISOLATION_DOMAIN_PARAMETER_DESCRIPTION),
+		),
+		mcp.WithString("resourceGroupName",
+			mcp.Required(),
+			mcp.Description(L2_ISOLATION_DOMAIN_RESOURCE_GROUP_DESCRIPTION),
+		),
+		mcp.WithString("subscriptionId",
+			mcp.Required(),
+			mcp.Description(L2_ISOLATION_DOMAIN_SUBSCRIPTION_ID_DESCRIPTION),
+		),
+		mcp.WithDescription("Get an L2 Isolation Domain"),
+	)
+}
+
+func GetL2IsolationDomainAdministrativeState(clientRetriever ServiceClientRetriever) (mcp.Tool, server.ToolHandlerFunc) {
+	return getL2IsolationDomainAdministrativeState(), func(ctx context.Context, request mcp.CallToolRequest) (*mcp.CallToolResult, error) {
+		args, ok := request.Params.Arguments.(map[string]any)
+		if !ok {
+			return nil, errors.New("invalid arguments format")
+		}
+
+		name, ok := args["name"].(string)
+		if !ok || name == "" {
+			return nil, errors.New("L2 isolation domain name missing")
+		}
+
+		resourceGroupName, ok := args["resourceGroupName"].(string)
+		if !ok || resourceGroupName == "" {
+			return nil, errors.New("resource group name missing")
+		}
+
+		subscriptionId, ok := args["subscriptionId"].(string)
+		if !ok || subscriptionId == "" {
+			return nil, errors.New("subscription id missing")
+		}
+
+		cred, err := clientRetriever.Get()
+		if err != nil {
+			return nil, fmt.Errorf("error getting credentials: %v", err)
+		}
+
+		client, err := armmanagednetworkfabric.NewL2IsolationDomainsClient(subscriptionId, cred, nil)
+		if err != nil {
+			return nil, fmt.Errorf("failed to create L2 isolation domains client: %v", err)
+		}
+
+		res, err := client.Get(ctx, resourceGroupName, name, nil)
+		if err != nil {
+			return nil, fmt.Errorf("failed to get L2 isolation domain: %v", err)
+		}
+
+		if res.Properties == nil || res.Properties.AdministrativeState == nil {
+			return nil, fmt.Errorf("administrative state not found for L2 isolation domain '%s'", name)
+		}
+
+		return mcp.NewToolResultText(string(*res.Properties.AdministrativeState)), nil
+	}
+}
+
+func getL2IsolationDomainAdministrativeState() mcp.Tool {
+	return mcp.NewTool(
+		GET_L2_ISOLATION_DOMAIN_ADMINISTRATIVE_STATE_TOOL_NAME,
+		mcp.WithString("name",
+			mcp.Required(),
+			mcp.Description(L2_ISOLATION_DOMAIN_PARAMETER_DESCRIPTION),
+		),
+		mcp.WithString("resourceGroupName",
+			mcp.Required(),
+			mcp.Description(L2_ISOLATION_DOMAIN_RESOURCE_GROUP_DESCRIPTION),
+		),
+		mcp.WithString("subscriptionId",
+			mcp.Required(),
+			mcp.Description(L2_ISOLATION_DOMAIN_SUBSCRIPTION_ID_DESCRIPTION),
+		),
+		mcp.WithDescription("Get the administrative state of an L2 Isolation Domain"),
+	)
+}
+
+func GetL2IsolationDomainConfigurationState(clientRetriever ServiceClientRetriever) (mcp.Tool, server.ToolHandlerFunc) {
+	return getL2IsolationDomainConfigurationState(), func(ctx context.Context, request mcp.CallToolRequest) (*mcp.CallToolResult, error) {
+		args, ok := request.Params.Arguments.(map[string]any)
+		if !ok {
+			return nil, errors.New("invalid arguments format")
+		}
+
+		name, ok := args["name"].(string)
+		if !ok || name == "" {
+			return nil, errors.New("L2 isolation domain name missing")
+		}
+
+		resourceGroupName, ok := args["resourceGroupName"].(string)
+		if !ok || resourceGroupName == "" {
+			return nil, errors.New("resource group name missing")
+		}
+
+		subscriptionId, ok := args["subscriptionId"].(string)
+		if !ok || subscriptionId == "" {
+			return nil, errors.New("subscription id missing")
+		}
+
+		cred, err := clientRetriever.Get()
+		if err != nil {
+			return nil, fmt.Errorf("error getting credentials: %v", err)
+		}
+
+		client, err := armmanagednetworkfabric.NewL2IsolationDomainsClient(subscriptionId, cred, nil)
+		if err != nil {
+			return nil, fmt.Errorf("failed to create L2 isolation domains client: %v", err)
+		}
+
+		res, err := client.Get(ctx, resourceGroupName, name, nil)
+		if err != nil {
+			return nil, fmt.Errorf("failed to get L2 isolation domain: %v", err)
+		}
+
+		if res.Properties == nil || res.Properties.ConfigurationState == nil {
+			return nil, fmt.Errorf("configuration state not found for L2 isolation domain '%s'", name)
+		}
+
+		return mcp.NewToolResultText(string(*res.Properties.ConfigurationState)), nil
+	}
+}
+
+func getL2IsolationDomainConfigurationState() mcp.Tool {
+	return mcp.NewTool(
+		GET_L2_ISOLATION_DOMAIN_CONFIGURATION_STATE_TOOL_NAME,
+		mcp.WithString("name",
+			mcp.Required(),
+			mcp.Description(L2_ISOLATION_DOMAIN_PARAMETER_DESCRIPTION),
+		),
+		mcp.WithString("resourceGroupName",
+			mcp.Required(),
+			mcp.Description(L2_ISOLATION_DOMAIN_RESOURCE_GROUP_DESCRIPTION),
+		),
+		mcp.WithString("subscriptionId",
+			mcp.Required(),
+			mcp.Description(L2_ISOLATION_DOMAIN_SUBSCRIPTION_ID_DESCRIPTION),
+		),
+		mcp.WithDescription("Get the configuration state of an L2 Isolation Domain"),
+	)
+}
+
+func DeleteL2IsolationDomain(clientRetriever ServiceClientRetriever) (mcp.Tool, server.ToolHandlerFunc) {
+	return deleteL2IsolationDomain(), func(ctx context.Context, request mcp.CallToolRequest) (*mcp.CallToolResult, error) {
+		args, ok := request.Params.Arguments.(map[string]any)
+		if !ok {
+			return nil, errors.New("invalid arguments format")
+		}
+
+		name, ok := args["name"].(string)
+		if !ok || name == "" {
+			return nil, errors.New("L2 isolation domain name missing")
+		}
+
+		resourceGroupName, ok := args["resourceGroupName"].(string)
+		if !ok || resourceGroupName == "" {
+			return nil, errors.New("resource group name missing")
+		}
+
+		subscriptionId, ok := args["subscriptionId"].(string)
+		if !ok || subscriptionId == "" {
+			return nil, errors.New("subscription id missing")
+		}
+
+		cred, err := clientRetriever.Get()
+		if err != nil {
+			return nil, fmt.Errorf("error getting credentials: %v", err)
+		}
+
+		client, err := armmanagednetworkfabric.NewL2IsolationDomainsClient(subscriptionId, cred, nil)
+		if err != nil {
+			return nil, fmt.Errorf("failed to create L2 isolation domains client: %v", err)
+		}
+
+		poller, err := client.BeginDelete(ctx, resourceGroupName, name, nil)
+		if err != nil {
+			return nil, fmt.Errorf("failed to begin deleting L2 isolation domain: %v", err)
+		}
+
+		_, err = poller.PollUntilDone(ctx, nil)
+		if err != nil {
+			return nil, fmt.Errorf("failed to delete L2 isolation domain: %v", err)
+		}
+
+		return mcp.NewToolResultText(fmt.Sprintf("L2 Isolation Domain '%s' deleted successfully from resource group '%s'", name, resourceGroupName)), nil
+	}
+}
+
+func deleteL2IsolationDomain() mcp.Tool {
+	return mcp.NewTool(
+		DELETE_L2_ISOLATION_DOMAIN_TOOL_NAME,
+		mcp.WithString("name",
+			mcp.Required(),
+			mcp.Description(L2_ISOLATION_DOMAIN_PARAMETER_DESCRIPTION),
+		),
+		mcp.WithString("resourceGroupName",
+			mcp.Required(),
+			mcp.Description(L2_ISOLATION_DOMAIN_RESOURCE_GROUP_DESCRIPTION),
+		),
+		mcp.WithString("subscriptionId",
+			mcp.Required(),
+			mcp.Description(L2_ISOLATION_DOMAIN_SUBSCRIPTION_ID_DESCRIPTION),
+		),
+		mcp.WithDescription("Delete an L2 Isolation Domain"),
+	)
+}

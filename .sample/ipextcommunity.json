@@ -3,5 +3,5 @@
   "location": "uksouth",
   "properties": "{\n \"ipExtendedCommunityRules\": [\n {\n \"action\": \"Permit\",\n \"sequenceNumber\": 100,\n \"type\": \"RouteTarget\",\n \"routeTargets\": [\"65000:100\"]\n }\n ]\n}",
   "resourceGroupName": "sachin-test-trustedip1",
-  "subscriptionId": "XXXXXXX"
+  "subscriptionId": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
 }

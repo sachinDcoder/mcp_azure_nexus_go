@@ -102,3 +102,68 @@ func createIPExtCommunity() mcp.Tool {
 		mcp.WithDescription("Create a new IP extended community"),
 	)
 }
+
+func DeleteIPExtCommunity(clientRetriever ServiceClientRetriever) (mcp.Tool, server.ToolHandlerFunc) {
+	return deleteIPExtCommunity(), func(ctx context.Context, request mcp.CallToolRequest) (*mcp.CallToolResult, error) {
+		args, ok := request.Params.Arguments.(map[string]any)
+		if !ok {
+			return nil, errors.New("invalid arguments format")
+		}
+
+		name, ok := args["name"].(string)
+		if !ok || name == "" {
+			return nil, errors.New("IP Extended Community name missing")
+		}
+
+		resourceGroupName, ok := args["resourceGroupName"].(string)
+		if !ok || resourceGroupName == "" {
+			return nil, errors.New("resource group name missing")
+		}
+
+		subscriptionId, ok := args["subscriptionId"].(string)
+		if !ok || subscriptionId == "" {
+			return nil, errors.New("subscription id missing")
+		}
+
+		cred, err := clientRetriever.Get()
+		if err != nil {
+			return nil, fmt.Errorf("error getting credentials: %v", err)
+		}
+
+		client, err := armmanagednetworkfabric.NewIPExtendedCommunitiesClient(subscriptionId, cred, nil)
+		if err != nil {
+			return nil, fmt.Errorf("failed to create ip extended communities client: %v", err)
+		}
+
+		poller, err := client.BeginDelete(ctx, resourceGroupName, name, nil)
+		if err != nil {
+			return nil, fmt.Errorf("failed to begin deleting ip extended community: %v", err)
+		}
+
+		_, err = poller.PollUntilDone(ctx, nil)
+		if err != nil {
+			return nil, fmt.Errorf("failed to delete ip extended community: %v", err)
+		}
+
+		return mcp.NewToolResultText(fmt.Sprintf("IP Extended Community '%s' deleted successfully from resource group '%s'", name, resourceGroupName)), nil
+	}
+}
+
+func deleteIPExtCommunity() mcp.Tool {
+	return mcp.NewTool(
+		DELETE_IP_EXT_COMMUNITY_TOOL_NAME,
+		mcp.WithString("name",
+			mcp.Required(),
+			mcp.Description(IPEXTCOMMUNITY_PARAMETER_DESCRIPTION),
+		),
+		mcp.WithString("resourceGroupName",
+			mcp.Required(),
+			mcp.Description(IPEXTCOMMUNITY_RESOURCE_GROUP_DESCRIPTION),
+		),
+		mcp.WithString("subscriptionId",
+			mcp.Required(),
+			mcp.Description(IPEXTCOMMUNITY_SUBSCRIPTION_ID_DESCRIPTION),
+		),
+		mcp.WithDescription("Delete an IP Extended Community"),
+	)
+}

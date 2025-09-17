@@ -31,6 +31,18 @@ func main() {
 	s.AddTool(tools.EnableL2IsolationDomain(tools.ServiceClientRetriever{}))
 	s.AddTool(tools.DisableL2IsolationDomain(tools.ServiceClientRetriever{}))
 	s.AddTool(tools.CreateExternalNetwork(tools.ServiceClientRetriever{}))
+	s.AddTool(tools.GetL2IsolationDomain(tools.ServiceClientRetriever{}))
+	s.AddTool(tools.GetL2IsolationDomainAdministrativeState(tools.ServiceClientRetriever{}))
+	s.AddTool(tools.GetL2IsolationDomainConfigurationState(tools.ServiceClientRetriever{}))
+	s.AddTool(tools.GetL3IsolationDomain(tools.ServiceClientRetriever{}))
+	s.AddTool(tools.GetL3IsolationDomainAdministrativeState(tools.ServiceClientRetriever{}))
+	s.AddTool(tools.GetL3IsolationDomainConfigurationState(tools.ServiceClientRetriever{}))
+	s.AddTool(tools.DeleteL2IsolationDomain(tools.ServiceClientRetriever{}))
+	s.AddTool(tools.DeleteL3IsolationDomain(tools.ServiceClientRetriever{}))
+	s.AddTool(tools.DeleteIPPrefix(tools.ServiceClientRetriever{}))
+	s.AddTool(tools.DeleteIPCommunity(tools.ServiceClientRetriever{}))
+	s.AddTool(tools.DeleteIPExtCommunity(tools.ServiceClientRetriever{}))
+	s.AddTool(tools.DeleteRoutePolicy(tools.ServiceClientRetriever{}))
 
 	// Start the stdio server
 	if err := server.ServeStdio(s); err != nil {

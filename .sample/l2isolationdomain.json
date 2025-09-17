@@ -2,9 +2,9 @@
   "name": "l2isd-demo-1",
   "location": "uksouth",
   "properties": {
-    "networkFabricId": "/subscriptions/XXXXXXXXXXXXXX/resourcegroups/nf-api-testing01-nf-rg/providers/microsoft.managednetworkfabric/networkfabrics/nf-api-testing01-nf",
+    "networkFabricId": "/subscriptions/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX/resourcegroups/nf-api-testing01-nf-rg/providers/microsoft.managednetworkfabric/networkfabrics/nf-api-testing01-nf",
     "vlanId": 1701
   },
   "resourceGroupName": "sachin-test-trustedip1",
-  "subscriptionId": "XXXXXXXXXXXXXX"
+  "subscriptionId": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
 }

@@ -102,3 +102,68 @@ func createRoutePolicy() mcp.Tool {
 		mcp.WithDescription("Create a new Route Policy"),
 	)
 }
+
+func DeleteRoutePolicy(clientRetriever ServiceClientRetriever) (mcp.Tool, server.ToolHandlerFunc) {
+	return deleteRoutePolicy(), func(ctx context.Context, request mcp.CallToolRequest) (*mcp.CallToolResult, error) {
+		args, ok := request.Params.Arguments.(map[string]any)
+		if !ok {
+			return nil, errors.New("invalid arguments format")
+		}
+
+		name, ok := args["name"].(string)
+		if !ok || name == "" {
+			return nil, errors.New("Route Policy name missing")
+		}
+
+		resourceGroupName, ok := args["resourceGroupName"].(string)
+		if !ok || resourceGroupName == "" {
+			return nil, errors.New("resource group name missing")
+		}
+
+		subscriptionId, ok := args["subscriptionId"].(string)
+		if !ok || subscriptionId == "" {
+			return nil, errors.New("subscription id missing")
+		}
+
+		cred, err := clientRetriever.Get()
+		if err != nil {
+			return nil, fmt.Errorf("error getting credentials: %v", err)
+		}
+
+		client, err := armmanagednetworkfabric.NewRoutePoliciesClient(subscriptionId, cred, nil)
+		if err != nil {
+			return nil, fmt.Errorf("failed to create route policies client: %v", err)
+		}
+
+		poller, err := client.BeginDelete(ctx, resourceGroupName, name, nil)
+		if err != nil {
+			return nil, fmt.Errorf("failed to begin deleting route policy: %v", err)
+		}
+
+		_, err = poller.PollUntilDone(ctx, nil)
+		if err != nil {
+			return nil, fmt.Errorf("failed to delete route policy: %v", err)
+		}
+
+		return mcp.NewToolResultText(fmt.Sprintf("Route Policy '%s' deleted successfully from resource group '%s'", name, resourceGroupName)), nil
+	}
+}
+
+func deleteRoutePolicy() mcp.Tool {
+	return mcp.NewTool(
+		DELETE_ROUTE_POLICY_TOOL_NAME,
+		mcp.WithString("name",
+			mcp.Required(),
+			mcp.Description(ROUTE_POLICY_PARAMETER_DESCRIPTION),
+		),
+		mcp.WithString("resourceGroupName",
+			mcp.Required(),
+			mcp.Description(ROUTE_POLICY_RESOURCE_GROUP_DESCRIPTION),
+		),
+		mcp.WithString("subscriptionId",
+			mcp.Required(),
+			mcp.Description(ROUTE_POLICY_SUBSCRIPTION_ID_DESCRIPTION),
+		),
+		mcp.WithDescription("Delete a Route Policy"),
+	)
+}
