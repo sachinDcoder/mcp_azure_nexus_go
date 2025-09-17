@@ -73,4 +73,10 @@ const (
 	EXTERNAL_NETWORK_PROPERTIES_DESCRIPTION      = "The properties of the External Network. This should be a JSON string."
 	EXTERNAL_NETWORK_RESOURCE_GROUP_DESCRIPTION  = "The name of the resource group."
 	EXTERNAL_NETWORK_SUBSCRIPTION_ID_DESCRIPTION = "The subscription ID for the Azure account."
+
+	CREATE_RESOURCE_GROUP_TOOL_NAME            = "create_resourcegroup"
+	DELETE_RESOURCE_GROUP_TOOL_NAME            = "delete_resourcegroup"
+	RESOURCE_GROUP_PARAMETER_DESCRIPTION       = "The name of the Resource Group."
+	RESOURCE_GROUP_LOCATION_DESCRIPTION        = "The location of the Resource Group."
+	RESOURCE_GROUP_SUBSCRIPTION_ID_DESCRIPTION = "The subscription ID for the Azure account."
 )

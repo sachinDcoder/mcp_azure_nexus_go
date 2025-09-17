@@ -19,6 +19,8 @@ func main() {
 
 	fmt.Println("Registering tools...")
 
+	s.AddTool(tools.CreateResourceGroup(tools.ServiceClientRetriever{}))
+	s.AddTool(tools.DeleteResourceGroup(tools.ServiceClientRetriever{}))
 	s.AddTool(tools.CreateIPPrefix(tools.ServiceClientRetriever{}))
 	s.AddTool(tools.CreateIPCommunity(tools.ServiceClientRetriever{}))
 	s.AddTool(tools.CreateIPExtCommunity(tools.ServiceClientRetriever{}))
