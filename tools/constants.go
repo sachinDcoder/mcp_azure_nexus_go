@@ -9,6 +9,8 @@ const (
 	IPREFIX_RESOURCE_GROUP_DESCRIPTION  = "The name of the resource group."
 	IPREFIX_SUBSCRIPTION_ID_DESCRIPTION = "The subscription ID for the Azure account."
 	DELETE_IP_PREFIX_TOOL_NAME          = "delete_ipprefix"
+	PATCH_IP_PREFIX_TOOL_NAME           = "patch_ipprefix"
+	GET_IP_PREFIX_TOOL_NAME             = "get_ipprefix"
 
 	CREATE_IP_COMMUNITY_TOOL_NAME           = "create_ipcommunity"
 	IPCOMMUNITY_PARAMETER_DESCRIPTION       = "The name of the IP community to be created."
@@ -17,6 +19,8 @@ const (
 	IPCOMMUNITY_RESOURCE_GROUP_DESCRIPTION  = "The name of the resource group."
 	IPCOMMUNITY_SUBSCRIPTION_ID_DESCRIPTION = "The subscription ID for the Azure account."
 	DELETE_IP_COMMUNITY_TOOL_NAME           = "delete_ipcommunity"
+	PATCH_IP_COMMUNITY_TOOL_NAME            = "patch_ipcommunity"
+	GET_IP_COMMUNITY_TOOL_NAME              = "get_ipcommunity"
 
 	CREATE_IP_EXT_COMMUNITY_TOOL_NAME          = "create_ipextcommunity"
 	IPEXTCOMMUNITY_PARAMETER_DESCRIPTION       = "The name of the IP extended community to be created."
@@ -25,6 +29,8 @@ const (
 	IPEXTCOMMUNITY_RESOURCE_GROUP_DESCRIPTION  = "The name of the resource group."
 	IPEXTCOMMUNITY_SUBSCRIPTION_ID_DESCRIPTION = "The subscription ID for the Azure account."
 	DELETE_IP_EXT_COMMUNITY_TOOL_NAME          = "delete_ipextcommunity"
+	PATCH_IP_EXT_COMMUNITY_TOOL_NAME           = "patch_ipextcommunity"
+	GET_IP_EXT_COMMUNITY_TOOL_NAME             = "get_ipextcommunity"
 
 	CREATE_ROUTE_POLICY_TOOL_NAME            = "create_routepolicy"
 	ROUTE_POLICY_PARAMETER_DESCRIPTION       = "The name of the Route Policy to be created."
@@ -33,6 +39,8 @@ const (
 	ROUTE_POLICY_RESOURCE_GROUP_DESCRIPTION  = "The name of the resource group."
 	ROUTE_POLICY_SUBSCRIPTION_ID_DESCRIPTION = "The subscription ID for the Azure account."
 	DELETE_ROUTE_POLICY_TOOL_NAME            = "delete_routepolicy"
+	PATCH_ROUTE_POLICY_TOOL_NAME             = "patch_routepolicy"
+	GET_ROUTE_POLICY_TOOL_NAME               = "get_routepolicy"
 
 	CREATE_L3_ISOLATION_DOMAIN_TOOL_NAME                   = "create_l3isolationdomain"
 	L3_ISOLATION_DOMAIN_PARAMETER_DESCRIPTION              = "The name of the L3 Isolation Domain to be created."
@@ -44,6 +52,7 @@ const (
 	GET_L3_ISOLATION_DOMAIN_ADMINISTRATIVE_STATE_TOOL_NAME = "get_l3isolationdomain_administrative_state"
 	GET_L3_ISOLATION_DOMAIN_CONFIGURATION_STATE_TOOL_NAME  = "get_l3isolationdomain_configuration_state"
 	DELETE_L3_ISOLATION_DOMAIN_TOOL_NAME                   = "delete_l3isolationdomain"
+	PATCH_L3_ISOLATION_DOMAIN_TOOL_NAME                    = "patch_l3isolationdomain"
 
 	ENABLE_L3_ISOLATION_DOMAIN_TOOL_NAME = "enable_l3isolationdomain"
 
@@ -52,6 +61,8 @@ const (
 	INTERNAL_NETWORK_PROPERTIES_DESCRIPTION      = "The properties of the Internal Network. This should be a JSON string."
 	INTERNAL_NETWORK_RESOURCE_GROUP_DESCRIPTION  = "The name of the resource group."
 	INTERNAL_NETWORK_SUBSCRIPTION_ID_DESCRIPTION = "The subscription ID for the Azure account."
+	PATCH_INTERNAL_NETWORK_TOOL_NAME             = "patch_internalnetwork"
+	GET_INTERNAL_NETWORK_TOOL_NAME               = "get_internalnetwork"
 
 	DISABLE_L3_ISOLATION_DOMAIN_TOOL_NAME = "disable_l3isolationdomain"
 
@@ -67,15 +78,20 @@ const (
 	GET_L2_ISOLATION_DOMAIN_ADMINISTRATIVE_STATE_TOOL_NAME = "get_l2isolationdomain_administrative_state"
 	GET_L2_ISOLATION_DOMAIN_CONFIGURATION_STATE_TOOL_NAME  = "get_l2isolationdomain_configuration_state"
 	DELETE_L2_ISOLATION_DOMAIN_TOOL_NAME                   = "delete_l2isolationdomain"
+	PATCH_L2_ISOLATION_DOMAIN_TOOL_NAME                    = "patch_l2isolationdomain"
 
 	CREATE_EXTERNAL_NETWORK_TOOL_NAME            = "create_externalnetwork"
 	EXTERNAL_NETWORK_PARAMETER_DESCRIPTION       = "The name of the External Network to be created."
 	EXTERNAL_NETWORK_PROPERTIES_DESCRIPTION      = "The properties of the External Network. This should be a JSON string."
 	EXTERNAL_NETWORK_RESOURCE_GROUP_DESCRIPTION  = "The name of the resource group."
 	EXTERNAL_NETWORK_SUBSCRIPTION_ID_DESCRIPTION = "The subscription ID for the Azure account."
+	PATCH_EXTERNAL_NETWORK_TOOL_NAME             = "patch_externalnetwork"
+	GET_EXTERNAL_NETWORK_TOOL_NAME               = "get_externalnetwork"
 
 	CREATE_RESOURCE_GROUP_TOOL_NAME            = "create_resourcegroup"
 	DELETE_RESOURCE_GROUP_TOOL_NAME            = "delete_resourcegroup"
+	GET_RESOURCE_GROUP_TOOL_NAME               = "get_resourcegroup"
+	LIST_RESOURCES_IN_RG_TOOL_NAME             = "list_resources_in_rg"
 	RESOURCE_GROUP_PARAMETER_DESCRIPTION       = "The name of the Resource Group."
 	RESOURCE_GROUP_LOCATION_DESCRIPTION        = "The location of the Resource Group."
 	RESOURCE_GROUP_SUBSCRIPTION_ID_DESCRIPTION = "The subscription ID for the Azure account."

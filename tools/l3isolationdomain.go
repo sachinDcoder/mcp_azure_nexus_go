@@ -498,3 +498,85 @@ func deleteL3IsolationDomain() mcp.Tool {
 		mcp.WithDescription("Delete an L3 Isolation Domain"),
 	)
 }
+
+func PatchL3IsolationDomain(clientRetriever ServiceClientRetriever) (mcp.Tool, server.ToolHandlerFunc) {
+	return patchL3IsolationDomain(), func(ctx context.Context, request mcp.CallToolRequest) (*mcp.CallToolResult, error) {
+		args, ok := request.Params.Arguments.(map[string]any)
+		if !ok {
+			return nil, errors.New("invalid arguments format")
+		}
+
+		name, ok := args["name"].(string)
+		if !ok || name == "" {
+			return nil, errors.New("L3 Isolation Domain name missing")
+		}
+
+		resourceGroupName, ok := args["resourceGroupName"].(string)
+		if !ok || resourceGroupName == "" {
+			return nil, errors.New("resource group name missing")
+		}
+
+		subscriptionId, ok := args["subscriptionId"].(string)
+		if !ok || subscriptionId == "" {
+			return nil, errors.New("subscription id missing")
+		}
+
+		propertiesStr, ok := args["properties"].(string)
+		if !ok || propertiesStr == "" {
+			return nil, errors.New("properties missing")
+		}
+
+		var patchProps armmanagednetworkfabric.L3IsolationDomainPatchProperties
+		if err := json.Unmarshal([]byte(propertiesStr), &patchProps); err != nil {
+			return nil, fmt.Errorf("error unmarshalling properties: %v", err)
+		}
+		properties := armmanagednetworkfabric.L3IsolationDomainPatch{
+			Properties: &patchProps,
+		}
+
+		cred, err := clientRetriever.Get()
+		if err != nil {
+			return nil, fmt.Errorf("error getting credentials: %v", err)
+		}
+
+		client, err := armmanagednetworkfabric.NewL3IsolationDomainsClient(subscriptionId, cred, nil)
+		if err != nil {
+			return nil, fmt.Errorf("failed to create l3 isolation domains client: %v", err)
+		}
+
+		poller, err := client.BeginUpdate(ctx, resourceGroupName, name, properties, nil)
+		if err != nil {
+			return nil, fmt.Errorf("failed to begin updating l3 isolation domain: %v", err)
+		}
+
+		_, err = poller.PollUntilDone(ctx, nil)
+		if err != nil {
+			return nil, fmt.Errorf("failed to update l3 isolation domain: %v", err)
+		}
+
+		return mcp.NewToolResultText(fmt.Sprintf("L3 Isolation Domain '%s' updated successfully in resource group '%s'", name, resourceGroupName)), nil
+	}
+}
+
+func patchL3IsolationDomain() mcp.Tool {
+	return mcp.NewTool(
+		PATCH_L3_ISOLATION_DOMAIN_TOOL_NAME,
+		mcp.WithString("name",
+			mcp.Required(),
+			mcp.Description(L3_ISOLATION_DOMAIN_PARAMETER_DESCRIPTION),
+		),
+		mcp.WithString("properties",
+			mcp.Required(),
+			mcp.Description("The properties to update on the L3 Isolation Domain. This should be a JSON string."),
+		),
+		mcp.WithString("resourceGroupName",
+			mcp.Required(),
+			mcp.Description(L3_ISOLATION_DOMAIN_RESOURCE_GROUP_DESCRIPTION),
+		),
+		mcp.WithString("subscriptionId",
+			mcp.Required(),
+			mcp.Description(L3_ISOLATION_DOMAIN_SUBSCRIPTION_ID_DESCRIPTION),
+		),
+		mcp.WithDescription("Patch an L3 Isolation Domain"),
+	)
+}

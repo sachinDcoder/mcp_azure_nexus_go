@@ -167,3 +167,150 @@ func deleteIPPrefix() mcp.Tool {
 		mcp.WithDescription("Delete an IP Prefix"),
 	)
 }
+
+func PatchIPPrefix(clientRetriever ServiceClientRetriever) (mcp.Tool, server.ToolHandlerFunc) {
+	return patchIPPrefix(), func(ctx context.Context, request mcp.CallToolRequest) (*mcp.CallToolResult, error) {
+		args, ok := request.Params.Arguments.(map[string]any)
+		if !ok {
+			return nil, errors.New("invalid arguments format")
+		}
+
+		name, ok := args["name"].(string)
+		if !ok || name == "" {
+			return nil, errors.New("IP Prefix name missing")
+		}
+
+		resourceGroupName, ok := args["resourceGroupName"].(string)
+		if !ok || resourceGroupName == "" {
+			return nil, errors.New("resource group name missing")
+		}
+
+		subscriptionId, ok := args["subscriptionId"].(string)
+		if !ok || subscriptionId == "" {
+			return nil, errors.New("subscription id missing")
+		}
+
+		propertiesStr, ok := args["properties"].(string)
+		if !ok || propertiesStr == "" {
+			return nil, errors.New("properties missing")
+		}
+
+		var patchProps armmanagednetworkfabric.IPPrefixPatchProperties
+		if err := json.Unmarshal([]byte(propertiesStr), &patchProps); err != nil {
+			return nil, fmt.Errorf("error unmarshalling properties: %v", err)
+		}
+		properties := armmanagednetworkfabric.IPPrefixPatch{
+			Properties: &patchProps,
+		}
+
+		cred, err := clientRetriever.Get()
+		if err != nil {
+			return nil, fmt.Errorf("error getting credentials: %v", err)
+		}
+
+		client, err := armmanagednetworkfabric.NewIPPrefixesClient(subscriptionId, cred, nil)
+		if err != nil {
+			return nil, fmt.Errorf("failed to create ip prefixes client: %v", err)
+		}
+
+		poller, err := client.BeginUpdate(ctx, resourceGroupName, name, properties, nil)
+		if err != nil {
+			return nil, fmt.Errorf("failed to begin updating ip prefix: %v", err)
+		}
+
+		_, err = poller.PollUntilDone(ctx, nil)
+		if err != nil {
+			return nil, fmt.Errorf("failed to update ip prefix: %v", err)
+		}
+
+		return mcp.NewToolResultText(fmt.Sprintf("IP Prefix '%s' updated successfully in resource group '%s'", name, resourceGroupName)), nil
+	}
+}
+
+func patchIPPrefix() mcp.Tool {
+	return mcp.NewTool(
+		PATCH_IP_PREFIX_TOOL_NAME,
+		mcp.WithString("name",
+			mcp.Required(),
+			mcp.Description(IPREFIX_PARAMETER_DESCRIPTION),
+		),
+		mcp.WithString("properties",
+			mcp.Required(),
+			mcp.Description("The properties to update on the IP Prefix. This should be a JSON string."),
+		),
+		mcp.WithString("resourceGroupName",
+			mcp.Required(),
+			mcp.Description(IPREFIX_RESOURCE_GROUP_DESCRIPTION),
+		),
+		mcp.WithString("subscriptionId",
+			mcp.Required(),
+			mcp.Description(IPREFIX_SUBSCRIPTION_ID_DESCRIPTION),
+		),
+		mcp.WithDescription("Patch an IP Prefix"),
+	)
+}
+
+func GetIPPrefix(clientRetriever ServiceClientRetriever) (mcp.Tool, server.ToolHandlerFunc) {
+	return getIPPrefix(), func(ctx context.Context, request mcp.CallToolRequest) (*mcp.CallToolResult, error) {
+		args, ok := request.Params.Arguments.(map[string]any)
+		if !ok {
+			return nil, errors.New("invalid arguments format")
+		}
+
+		name, ok := args["name"].(string)
+		if !ok || name == "" {
+			return nil, errors.New("IP Prefix name missing")
+		}
+
+		resourceGroupName, ok := args["resourceGroupName"].(string)
+		if !ok || resourceGroupName == "" {
+			return nil, errors.New("resource group name missing")
+		}
+
+		subscriptionId, ok := args["subscriptionId"].(string)
+		if !ok || subscriptionId == "" {
+			return nil, errors.New("subscription id missing")
+		}
+
+		cred, err := clientRetriever.Get()
+		if err != nil {
+			return nil, fmt.Errorf("error getting credentials: %v", err)
+		}
+
+		client, err := armmanagednetworkfabric.NewIPPrefixesClient(subscriptionId, cred, nil)
+		if err != nil {
+			return nil, fmt.Errorf("failed to create ip prefixes client: %v", err)
+		}
+
+		res, err := client.Get(ctx, resourceGroupName, name, nil)
+		if err != nil {
+			return nil, fmt.Errorf("failed to get ip prefix: %v", err)
+		}
+
+		resJson, err := json.Marshal(res)
+		if err != nil {
+			return nil, fmt.Errorf("failed to marshal response: %v", err)
+		}
+
+		return mcp.NewToolResultText(string(resJson)), nil
+	}
+}
+
+func getIPPrefix() mcp.Tool {
+	return mcp.NewTool(
+		GET_IP_PREFIX_TOOL_NAME,
+		mcp.WithString("name",
+			mcp.Required(),
+			mcp.Description(IPREFIX_PARAMETER_DESCRIPTION),
+		),
+		mcp.WithString("resourceGroupName",
+			mcp.Required(),
+			mcp.Description(IPREFIX_RESOURCE_GROUP_DESCRIPTION),
+		),
+		mcp.WithString("subscriptionId",
+			mcp.Required(),
+			mcp.Description(IPREFIX_SUBSCRIPTION_ID_DESCRIPTION),
+		),
+		mcp.WithDescription("Get an IP Prefix"),
+	)
+}
