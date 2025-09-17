@@ -46,4 +46,13 @@ const (
 	INTERNAL_NETWORK_SUBSCRIPTION_ID_DESCRIPTION = "The subscription ID for the Azure account."
 
 	DISABLE_L3_ISOLATION_DOMAIN_TOOL_NAME = "disable_l3isolationdomain"
+
+	CREATE_L2_ISOLATION_DOMAIN_TOOL_NAME            = "create_l2isolationdomain"
+	L2_ISOLATION_DOMAIN_PARAMETER_DESCRIPTION       = "The name of the L2 Isolation Domain to be created."
+	L2_ISOLATION_DOMAIN_LOCATION_DESCRIPTION        = "The location of the L2 Isolation Domain."
+	L2_ISOLATION_DOMAIN_PROPERTIES_DESCRIPTION      = "The properties of the L2 Isolation Domain. This should be a JSON string."
+	L2_ISOLATION_DOMAIN_RESOURCE_GROUP_DESCRIPTION  = "The name of the resource group."
+	L2_ISOLATION_DOMAIN_SUBSCRIPTION_ID_DESCRIPTION = "The subscription ID for the Azure account."
+	ENABLE_L2_ISOLATION_DOMAIN_TOOL_NAME            = "enable_l2isolationdomain"
+	DISABLE_L2_ISOLATION_DOMAIN_TOOL_NAME           = "disable_l2isolationdomain"
 )
