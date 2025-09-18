@@ -5,12 +5,12 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"strings"
 
+	"github.com/Azure/azure-sdk-for-go/sdk/azcore/to"
 	"github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/managednetworkfabric/armmanagednetworkfabric"
 	"github.com/mark3labs/mcp-go/mcp"
 	"github.com/mark3labs/mcp-go/server"
-
-	"github.com/Azure/azure-sdk-for-go/sdk/azcore/to"
 )
 
 func GetNetworkDevice(clientRetriever ServiceClientRetriever) (mcp.Tool, server.ToolHandlerFunc) {
@@ -108,6 +108,15 @@ func RebootNetworkDevice(clientRetriever ServiceClientRetriever) (mcp.Tool, serv
 		client, err := armmanagednetworkfabric.NewNetworkDevicesClient(subscriptionId, cred, nil)
 		if err != nil {
 			return nil, fmt.Errorf("failed to create network devices client: %v", err)
+		}
+
+		device, err := client.Get(ctx, resourceGroupName, deviceName, nil)
+		if err != nil {
+			return nil, fmt.Errorf("failed to get network device: %v", err)
+		}
+
+		if device.Properties.SerialNumber != nil && strings.Contains(*device.Properties.SerialNumber, "cEOSLab") {
+			return mcp.NewToolResultText(fmt.Sprintf("Skipping reboot for vlab device '%s'.", deviceName)), nil
 		}
 
 		rebootProperties := armmanagednetworkfabric.RebootProperties{
