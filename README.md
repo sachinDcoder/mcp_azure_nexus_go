@@ -3,6 +3,7 @@
 This is an implementation of a MCP server for Azure Nexus built using its [Go SDK](github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/managednetworkfabric/armmanagednetworkfabric). It exposes the following tools for interacting with Azure Nexus Resources:
 ![alt text](images/design.png)
 
+## Functionalities
 - **Resource Group**: Create, delete, get, and list resources in a resource group.
 - **IP Prefix**: Create, delete, patch, and get IP prefixes.
 - **IP Community**: Create, delete, patch, and get IP communities.
@@ -15,15 +16,18 @@ This is an implementation of a MCP server for Azure Nexus built using its [Go SD
 - **Network Fabric**: Commit and get network fabrics.
 ![alt text](images/image.png)
 
-
 > The project uses [mcp-go](https://github.com/mark3labs/mcp-go) as the MCP implementation.
 
 ## How to run
 
 > Word(s) of caution: As much as I want folks to benefit from this, I have to call out that Large Language Models (LLMs) are non-deterministic by nature and can make mistakes. I would recommend you to **always validate** the results before making any decisions based on them.
 
-You can use the provided `Makefile` to build and run the server.
+```bash
+git clone https://github.com/sachinDcoder/mcp_azure_nexus_go.git
+cd mcp_azure_nexus_go
+```
 
+You can use the provided `Makefile` to build and run the server.
 - `make build`: Builds the server binary.
 - `make run`: Builds and runs the server.
 - `make tidy`: Tidies the Go module dependencies.
@@ -31,13 +35,10 @@ You can use the provided `Makefile` to build and run the server.
 
 Alternatively, you can manually build and run the server:
 ```bash
-git clone https://github.com/sachinDcoder/mcp_azure_nexus_go.git
-cd mcp_azure_nexus_go
-
 go build -o azure-nexus-mcp-server .
 ```
 
-```
+```bash
 rajasachin@CPC-rajas-TQPGA:~/hackathon/azure-nexus-mcp-server$ go build -o azure-nexus-mcp-server .
 rajasachin@CPC-rajas-TQPGA:~/hackathon/azure-nexus-mcp-server$ ./azure-nexus-mcp-server
 Welcome to Azure Nexus MCP server!
@@ -76,7 +77,9 @@ Here is an example of Claude Desktop configuration:
 }
 ```
 
-Here is an example of Cline:
+For Cline, add the following configuration to your settings file. You can find the settings file by opening the command palette and searching for "Cline: Open Settings (JSON)".
+![alt text](images/cline-mcp-config.png)
+![alt text](images/cline-mcp-config-setup.png)
 ```json
 {
   "mcpServers": {
