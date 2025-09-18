@@ -70,6 +70,9 @@ func main() {
 	s.AddTool(tools.PatchExternalNetwork(tools.ServiceClientRetriever{}))
 	s.AddTool(tools.GetExternalNetwork(tools.ServiceClientRetriever{}))
 
+	s.AddTool(tools.CommitNetworkFabric(tools.ServiceClientRetriever{}))
+	s.AddTool(tools.GetNetworkFabric(tools.ServiceClientRetriever{}))
+
 	// Start the stdio server
 	if err := server.ServeStdio(s); err != nil {
 		fmt.Printf("Server error: %v\n", err)

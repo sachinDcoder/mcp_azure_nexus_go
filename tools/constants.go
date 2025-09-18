@@ -88,6 +88,12 @@ const (
 	PATCH_EXTERNAL_NETWORK_TOOL_NAME             = "patch_externalnetwork"
 	GET_EXTERNAL_NETWORK_TOOL_NAME               = "get_externalnetwork"
 
+	COMMIT_NETWORK_FABRIC_TOOL_NAME            = "commit_network_fabric"
+	NETWORK_FABRIC_PARAMETER_DESCRIPTION       = "The name of the Network Fabric."
+	NETWORK_FABRIC_RESOURCE_GROUP_DESCRIPTION  = "The name of the resource group."
+	NETWORK_FABRIC_SUBSCRIPTION_ID_DESCRIPTION = "The subscription ID for the Azure account."
+	GET_NETWORK_FABRIC_TOOL_NAME               = "get_network_fabric"
+
 	CREATE_RESOURCE_GROUP_TOOL_NAME            = "create_resourcegroup"
 	DELETE_RESOURCE_GROUP_TOOL_NAME            = "delete_resourcegroup"
 	GET_RESOURCE_GROUP_TOOL_NAME               = "get_resourcegroup"
