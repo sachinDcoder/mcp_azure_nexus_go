@@ -74,6 +74,9 @@ func main() {
 	s.AddTool(tools.GetNetworkFabric(tools.ServiceClientRetriever{}))
 	s.AddTool(tools.ListDevicesNetworkFabric(tools.ServiceClientRetriever{}))
 
+	s.AddTool(tools.GetNetworkDevice(tools.ServiceClientRetriever{}))
+	s.AddTool(tools.RebootNetworkDevice(tools.ServiceClientRetriever{}))
+
 	// Start the stdio server
 	if err := server.ServeStdio(s); err != nil {
 		fmt.Printf("Server error: %v\n", err)

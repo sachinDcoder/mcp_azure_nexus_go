@@ -14,6 +14,7 @@ This is an implementation of a MCP server for Azure Nexus built using its [Go SD
 - **Internal Network**: Create, patch, and get internal networks.
 - **External Network**: Create, patch, and get external networks.
 - **Network Fabric**: Commit, get, and list devices from network fabrics.
+- **Network Device**: Get details of and reboot network devices.
 ![alt text](images/image.png)
 
 > The project uses [mcp-go](https://github.com/mark3labs/mcp-go) as the MCP implementation.

@@ -102,4 +102,10 @@ const (
 	RESOURCE_GROUP_PARAMETER_DESCRIPTION       = "The name of the Resource Group."
 	RESOURCE_GROUP_LOCATION_DESCRIPTION        = "The location of the Resource Group."
 	RESOURCE_GROUP_SUBSCRIPTION_ID_DESCRIPTION = "The subscription ID for the Azure account."
+
+	GET_NETWORK_DEVICE_TOOL_NAME               = "get_network_device"
+	REBOOT_NETWORK_DEVICE_TOOL_NAME            = "reboot_network_device"
+	NETWORK_DEVICE_PARAMETER_DESCRIPTION       = "The name of the Network Device."
+	NETWORK_DEVICE_RESOURCE_GROUP_DESCRIPTION  = "The name of the resource group."
+	NETWORK_DEVICE_SUBSCRIPTION_ID_DESCRIPTION = "The subscription ID for the Azure account."
 )
