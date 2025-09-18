@@ -77,9 +77,9 @@ Here is an example of Claude Desktop configuration:
 }
 ```
 
-For Cline, add the following configuration to your settings file. You can find the settings file by opening the command palette and searching for "Cline: Open Settings (JSON)".
-![alt text](images/cline-mcp-config.png)
-![alt text](images/cline-mcp-config-setup.png)
+For Cline, you can configure the MCP server through the settings.
+1. Open the command palette and search for "Cline: Open Settings (JSON)".
+2. Add the following configuration to your settings file:
 ```json
 {
   "mcpServers": {
@@ -91,3 +91,7 @@ For Cline, add the following configuration to your settings file. You can find t
   }
 }
 ```
+3. Alternatively, you can use the UI to configure the server. Click on "Manage MCP Server":
+![alt text](images/cline-mcp-config.png)
+4. Then, set up the MCP Server with the required details:
+![alt text](images/cline-mcp-config-setup.png)
