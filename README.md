@@ -13,7 +13,7 @@ This is an implementation of a MCP server for Azure Nexus built using its [Go SD
 - **L3 Isolation Domain**: Create, delete, patch, get, enable, disable, and get administrative/configuration state of L3 isolation domains.
 - **Internal Network**: Create, patch, and get internal networks.
 - **External Network**: Create, patch, and get external networks.
-- **Network Fabric**: Commit and get network fabrics.
+- **Network Fabric**: Commit, get, and list devices from network fabrics.
 ![alt text](images/image.png)
 
 > The project uses [mcp-go](https://github.com/mark3labs/mcp-go) as the MCP implementation.

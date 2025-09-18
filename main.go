@@ -72,6 +72,7 @@ func main() {
 
 	s.AddTool(tools.CommitNetworkFabric(tools.ServiceClientRetriever{}))
 	s.AddTool(tools.GetNetworkFabric(tools.ServiceClientRetriever{}))
+	s.AddTool(tools.ListDevicesNetworkFabric(tools.ServiceClientRetriever{}))
 
 	// Start the stdio server
 	if err := server.ServeStdio(s); err != nil {

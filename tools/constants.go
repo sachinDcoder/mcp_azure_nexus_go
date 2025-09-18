@@ -93,6 +93,7 @@ const (
 	NETWORK_FABRIC_RESOURCE_GROUP_DESCRIPTION  = "The name of the resource group."
 	NETWORK_FABRIC_SUBSCRIPTION_ID_DESCRIPTION = "The subscription ID for the Azure account."
 	GET_NETWORK_FABRIC_TOOL_NAME               = "get_network_fabric"
+	LIST_DEVICES_NETWORK_FABRIC_TOOL_NAME      = "list_devices_network_fabric"
 
 	CREATE_RESOURCE_GROUP_TOOL_NAME            = "create_resourcegroup"
 	DELETE_RESOURCE_GROUP_TOOL_NAME            = "delete_resourcegroup"
