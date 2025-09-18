@@ -15,6 +15,7 @@ This is an implementation of a MCP server for Azure Nexus built using its [Go SD
 - **External Network**: Create, patch, and get external networks.
 - **Network Fabric**: Commit, get, and list devices from network fabrics.
 - **Network Device**: Get details of and reboot network devices.
+
 ![alt text](images/image.png)
 
 > The project uses [mcp-go](https://github.com/mark3labs/mcp-go) as the MCP implementation.
@@ -93,6 +94,9 @@ For Cline, you can configure the MCP server through the settings.
 }
 ```
 3. Alternatively, you can use the UI to configure the server. Click on "Manage MCP Server":
+
 ![alt text](images/cline-mcp-config.png)
+
 4. Then, set up the MCP Server with the required details:
+
 ![alt text](images/cline-mcp-config-setup.png)
