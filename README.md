@@ -1,5 +1,7 @@
 # MCP server for Azure Nexus using the Go SDK
 
+This server extends your development environment, allowing you to interact with Azure Nexus resources directly from your favorite editor or tool that supports the Model Context Protocol (MCP).
+
 This is an implementation of a MCP server for Azure Nexus built using its [Go SDK](github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/managednetworkfabric/armmanagednetworkfabric). It exposes the following tools for interacting with Azure Nexus Resources:
 ![alt text](images/design.png)
 
