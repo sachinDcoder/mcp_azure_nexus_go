@@ -15,15 +15,18 @@ type LabStatus struct {
 }
 
 type FabricStatus struct {
-	Name              string         `json:"name"`
-	ProvisioningState string         `json:"provisioningState"`
-	DeviceStatus      []DeviceStatus `json:"deviceStatus"`
+	Name                string         `json:"name"`
+	ProvisioningState   string         `json:"provisioningState"`
+	AdministrativeState string         `json:"administrativeState"`
+	ConfigurationState  string         `json:"configurationState"`
+	DeviceStatus        []DeviceStatus `json:"deviceStatus"`
 }
 
 type DeviceStatus struct {
-	Name              string `json:"name"`
-	ProvisioningState string `json:"provisioningState"`
-	OperationalState  string `json:"operationalState"`
+	Name                string `json:"name"`
+	ProvisioningState   string `json:"provisioningState"`
+	AdministrativeState string `json:"administrativeState"`
+	ConfigurationState  string `json:"configurationState"`
 }
 
 func GetLabStatus(clientRetriever ServiceClientRetriever) (mcp.Tool, server.ToolHandlerFunc) {
@@ -69,6 +72,8 @@ func GetLabStatus(clientRetriever ServiceClientRetriever) (mcp.Tool, server.Tool
 				var fabricStatus FabricStatus
 				fabricStatus.Name = *fabric.Name
 				fabricStatus.ProvisioningState = string(*fabric.Properties.ProvisioningState)
+				fabricStatus.AdministrativeState = string(*fabric.Properties.AdministrativeState)
+				fabricStatus.ConfigurationState = string(*fabric.Properties.ConfigurationState)
 
 				deviceIds, err := getDeviceIdsForFabric(ctx, clientRetriever, subscriptionId, resourceGroupName, *fabric.Name)
 				if err != nil {
@@ -83,7 +88,8 @@ func GetLabStatus(clientRetriever ServiceClientRetriever) (mcp.Tool, server.Tool
 					var deviceStatus DeviceStatus
 					deviceStatus.Name = *device.Name
 					deviceStatus.ProvisioningState = string(*device.Properties.ProvisioningState)
-					deviceStatus.OperationalState = string(*device.Properties.AdministrativeState)
+					deviceStatus.AdministrativeState = string(*device.Properties.AdministrativeState)
+					deviceStatus.ConfigurationState = string(*device.Properties.ConfigurationState)
 					fabricStatus.DeviceStatus = append(fabricStatus.DeviceStatus, deviceStatus)
 				}
 				labStatus.FabricStatus = append(labStatus.FabricStatus, fabricStatus)
@@ -96,12 +102,12 @@ func GetLabStatus(clientRetriever ServiceClientRetriever) (mcp.Tool, server.Tool
 		}
 
 		for _, fabric := range labStatus.FabricStatus {
-			if fabric.ProvisioningState != "Succeeded" {
+			if fabric.ProvisioningState != "Succeeded" || fabric.AdministrativeState != "Enabled" || (fabric.ConfigurationState != "Succeeded" && fabric.ConfigurationState != "Provisioned") {
 				isHealthy = false
 				break
 			}
 			for _, device := range fabric.DeviceStatus {
-				if device.ProvisioningState != "Succeeded" || device.OperationalState != "Enabled" {
+				if device.ProvisioningState != "Succeeded" || device.AdministrativeState != "Enabled" || device.ConfigurationState != "Succeeded" {
 					isHealthy = false
 					break
 				}
@@ -120,12 +126,12 @@ func GetLabStatus(clientRetriever ServiceClientRetriever) (mcp.Tool, server.Tool
 
 		resultString += "Fabric Status:\n"
 		for _, fabric := range labStatus.FabricStatus {
-			resultString += fmt.Sprintf("- %s (Provisioning State: %s)\n", fabric.Name, fabric.ProvisioningState)
+			resultString += fmt.Sprintf("- %s (Provisioning State: %s, Administrative State: %s, Configuration State: %s)\n", fabric.Name, fabric.ProvisioningState, fabric.AdministrativeState, fabric.ConfigurationState)
 			resultString += "  Devices:\n"
-			resultString += "    | Name | Provisioning State | Operational State |\n"
-			resultString += "    | :--- | :--- | :--- |\n"
+			resultString += "    | Name | Provisioning State | AdministrativeState | Configuration State |\n"
+			resultString += "    | :--- | :--- | :--- | :--- |\n"
 			for _, device := range fabric.DeviceStatus {
-				resultString += fmt.Sprintf("    | %s | %s | %s |\n", device.Name, device.ProvisioningState, device.OperationalState)
+				resultString += fmt.Sprintf("    | %s | %s | %s | %s |\n", device.Name, device.ProvisioningState, device.AdministrativeState, device.ConfigurationState)
 			}
 			resultString += "\n"
 		}
