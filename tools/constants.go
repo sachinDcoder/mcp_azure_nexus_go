@@ -108,4 +108,6 @@ const (
 	NETWORK_DEVICE_PARAMETER_DESCRIPTION       = "The name of the Network Device."
 	NETWORK_DEVICE_RESOURCE_GROUP_DESCRIPTION  = "The name of the resource group."
 	NETWORK_DEVICE_SUBSCRIPTION_ID_DESCRIPTION = "The subscription ID for the Azure account."
+
+	GET_LAB_STATUS_TOOL_NAME = "get_lab_status"
 )

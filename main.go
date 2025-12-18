@@ -76,6 +76,7 @@ func main() {
 
 	s.AddTool(tools.GetNetworkDevice(tools.ServiceClientRetriever{}))
 	s.AddTool(tools.RebootNetworkDevice(tools.ServiceClientRetriever{}))
+	s.AddTool(tools.GetLabStatus(tools.ServiceClientRetriever{}))
 
 	// Start the stdio server
 	if err := server.ServeStdio(s); err != nil {
